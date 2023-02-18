@@ -1,0 +1,30 @@
+<pre>
+<font color="#00979c">volatile</font> <font color="#00979c">unsigned</font> <font color="#00979c">long</font> <font color="#000000">duration</font><font color="#000000">;</font>
+<font color="#00979c">volatile</font> <font color="#00979c">bool</font> <font color="#000000">measurementComplete</font> <font color="#434f54">=</font> <font color="#00979c">false</font><font color="#000000">;</font>
+<font color="#00979c">void</font> <font color="#000000">onEchoReceived</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
+ &nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">buzzerPin</font><font color="#434f54">,</font><font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">100</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">buzzerPin</font><font color="#434f54">,</font><font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">50</font><font color="#000000">)</font><font color="#000000">;</font>
+<font color="#000000">}</font>
+<font color="#00979c">void</font> <font color="#5e6d03">setup</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
+ &nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">begin</font><font color="#000000">(</font><font color="#000000">9600</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">triggerPin</font><font color="#434f54">,</font> <font color="#00979c">OUTPUT</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">echoPin</font><font color="#434f54">,</font> <font color="#00979c">INPUT</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#d35400">attachInterrupt</font><font color="#000000">(</font><font color="#d35400">digitalPinToInterrupt</font><font color="#000000">(</font><font color="#000000">echoPin</font><font color="#000000">)</font><font color="#434f54">,</font> <font color="#000000">onEchoReceived</font><font color="#434f54">,</font> <font color="#00979c">RISING</font><font color="#000000">)</font><font color="#000000">;</font> <font color="#434f54">&#47;&#47;parte critica...</font>
+<font color="#000000">}</font>
+
+</pre>
+
+<pre>
+<font color="#434f54">&#47;&#47;Interrupt service routine</font>
+<font color="#000000">ISR</font><font color="#000000">(</font><font color="#d35400">digitalPinToInterrupt</font><font color="#000000">(</font><font color="#000000">echoPin</font><font color="#000000">)</font><font color="#000000">)</font> <font color="#000000">{</font> 
+ &nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#d35400">digitalRead</font><font color="#000000">(</font><font color="#000000">echoPin</font><font color="#000000">)</font> <font color="#434f54">==</font> <font color="#00979c">HIGH</font><font color="#000000">)</font> <font color="#000000">{</font>
+ &nbsp;&nbsp;&nbsp;<font color="#000000">duration</font> <font color="#434f54">=</font> <font color="#d35400">micros</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#434f54">-</font> <font color="#000000">duration</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;<font color="#000000">measurementComplete</font> <font color="#434f54">=</font> <font color="#00979c">true</font><font color="#000000">;</font>
+ &nbsp;<font color="#000000">}</font> <font color="#5e6d03">else</font> <font color="#000000">{</font>
+ &nbsp;&nbsp;&nbsp;<font color="#000000">duration</font> <font color="#434f54">=</font> <font color="#d35400">micros</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#000000">}</font>
+<font color="#000000">}</font>
+
+</pre>
