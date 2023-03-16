@@ -15,34 +15,41 @@ ESP32 è un microcontrollore a 32 bit realizzato dall’azienda cinese “Espres
 Questo microcontrollore è ampiamente utilizzato nell’area dell’ internet of things (IoT), per realizzare progetti domestici, oppure per sensori di monitoraggio e molto altro ancora. La flessibilità di ESP32, combinata con la suo basso consumo per l’elaborazione, lo rende adatto per la realizzazione di molte applicazioni, dal controllo di dispositivi a basso consumo energetico, all’elaborazione di segnali complessi e l’interfacciamento con servizi cloud.
 
 REALIZZAZIONE CIRCUITALE E LISTA DEI COMPONENTI
-	ESP32 microcontroller SoC (System on Chip)
-	Sensore di profondità HC – SR04
-	Buzzer(cicalino) YXDZ
+	
+	- ESP32 microcontroller SoC (System on Chip)
+	- Sensore di profondità HC – SR04
+	- Buzzer(cicalino) YXDZ
 
 ELENCO LAVORAZIONI
-	Forature e filettature
-	Saldatura a stagno su PCB
-	Smussature bordi
+
+	- Forature e filettature
+	- Saldatura a stagno su PCB
+	- Smussature bordi
 
 
 Sensore HC – SR04
+
 Il sensore HC-SR04 è un dispositivo di misurazione della distanza che utilizza gli ultrasuoni. Per capire come funziona, è utile sapere che gli ultrasuoni sono onde sonore ad alta frequenza, che si propagano nell'aria a una velocità di circa 340 metri al secondo. Il sensore HC-SR04 funziona inviando un impulso di ultrasuoni, che viene emesso dal trasmettitore del sensore. Questo impulso viaggia attraverso l'aria fino a incontrare un oggetto, che lo riflette. L'impulso riflesso viene poi rilevato dal ricevitore del sensore.
 Il tempo impiegato per l'impulso ad andare dall'emettitore all'oggetto e ritornare al ricevitore viene quindi misurato dal sensore HC-SR04. Questo tempo di volo viene poi utilizzato per calcolare la distanza tra l'oggetto e il sensore, utilizzando la formula:
 
-distanza=(tempo di volo*velocità del suono)/2  					
+distanza=(tempo di volo*velocità del suono)/2  	
+
 Dove la velocità del suono nell'aria viene generalmente considerata pari a circa 340 m/s.
 Per rendere la misura più accurata, il sensore HC-SR04 di solito invia diversi impulsi di ultrasuoni e ne calcola la media dei tempi di volo. Il sensore dispone inoltre di un circuito integrato che si occupa di gestire l'emissione e la ricezione degli impulsi di ultrasuoni e di convertire il tempo di volo in una misura di distanza.
 
 
 
 BUZZER(CICALINO)
+
 In generale, un buzzer è un dispositivo elettronico che produce un suono quando viene attivato. Esistono diverse tipologie di buzzer, tra cui quelli piezoelettrici e quelli elettromagnetici.
 Il buzzer piezoelettrico è costituito da una lamina di materiale piezoelettrico che vibra quando viene applicata una corrente elettrica ad essa. Questa vibrazione produce un suono ad una frequenza determinata dal design del buzzer. I buzzer piezoelettrici sono molto utilizzati in applicazioni di segnalazione acustica, come ad esempio nei sistemi di allarme, nei giocattoli e nei dispositivi di avviso sonoro.
 Il buzzer elettromagnetico, invece, utilizza un'armatura metallica che viene attratta da un magnete quando una corrente elettrica viene applicata alla bobina del magnete. Questo movimento produce un suono ad una determinata frequenza.
 
 CODICE SORGENTE
+
 In seguito, il codice scritto per programmare la scheda AZ – Delivery ESP32, basata sul modulo ESP32 – WROOM. Il codice è stato compattato utilizzando dei pattern per delineare i componenti indipendenti tra loro; in particolare si ha:
-	 void loop() e void setup()  che sono funzioni obbligatorie per la realizzazione di un programma in Arduino; setup() è una funzione che serve per configurare le variabili dichiarate; ad esempio, se ho un led sul pin 13, dichiaro int led = 13 e nel setup() configuro il pin 13 come un output per vedere il segnale in uscita sul led; void loop() invece è una funzione che, come suggerisce il nome, continuerà in loop la porzione di codice scritta in essa. In questo progetto il loop() prevede un collegamento tra un dispositivo android e il modulo bluetooth dell’ESP32 (tramite la funzione void bluetooth()). Per la comunicazione su android, ho installato l’applicazione “Serial Bluetooth Terminal”. Quando il dispositivo android verrà associato, il loop attenderà un input specifico da parte del dispositivo stesso, che è il comando denominato “controllo_ON”; il comando fa partire un ciclo “do –  while” presente nella funzione sensor().
+
+void loop() e void setup()  che sono funzioni obbligatorie per la realizzazione di un programma in Arduino; setup() è una funzione che serve per configurare le variabili dichiarate; ad esempio, se ho un led sul pin 13, dichiaro int led = 13 e nel setup() configuro il pin 13 come un output per vedere il segnale in uscita sul led; void loop() invece è una funzione che, come suggerisce il nome, continuerà in loop la porzione di codice scritta in essa. In questo progetto il loop() prevede un collegamento tra un dispositivo android e il modulo bluetooth dell’ESP32 (tramite la funzione void bluetooth()). Per la comunicazione su android, ho installato l’applicazione “Serial Bluetooth Terminal”. Quando il dispositivo android verrà associato, il loop attenderà un input specifico da parte del dispositivo stesso, che è il comando denominato “controllo_ON”; il comando fa partire un ciclo “do –  while” presente nella funzione sensor().
 	void sensor(), funzione che gestisce il sensore HC – SR04, calcolando ciclicamente la distanza tra il sensore e l’oggetto riscontrato dall’ultrasuoni. Il ciclo si interrompe se il sensore legge una distanza che non è compresa tra SOGLIA_MAX e SOGLIA_MIN.
 	void buzzAlarm(),è la funzione che gestisce l’allarme, azionando il buzzer.
 
@@ -60,8 +67,10 @@ Interrupt Service Routine (ISR) è una funzione di gestione degli interrupt che 
 L'ISR deve essere scritta in modo efficiente e veloce, poiché il microcontrollore deve tornare al più presto possibile alla normale esecuzione del programma principale. L'ISR deve anche essere scritta con una particolare attenzione alla sicurezza, poiché l'esecuzione del codice all'interno dell'ISR può causare problemi se non gestita correttamente.
 Il parametro "mode" della funzione attachInterrupt() in Arduino specifica il tipo di transizione del segnale di input sul pin di interrupt che deve attivare l'ISR (Interrupt Service Routine), ovvero la funzione che viene eseguita quando l'interrupt si verifica.
 Ci sono tre tipi di mode possibili: CHANGE, FALLING e RISING.
+
 	CHANGE: attiva l'ISR quando il segnale di input sul pin di interrupt cambia di stato, ovvero da HIGH a LOW o viceversa.
 	FALLING: attiva l'ISR quando il segnale di input sul pin di interrupt passa da HIGH a LOW.
 	RISING: attiva l'ISR quando il segnale di input sul pin di interrupt passa da LOW a HIGH.
+	
 Ad esempio, se si utilizza il parametro RISING, l'ISR verrà eseguita quando il segnale di input sul pin di interrupt passa da LOW a HIGH. Questo può essere utile, ad esempio, per gestire un pulsante: quando il pulsante viene premuto, il segnale sul pin di interrupt passa da LOW a HIGH e l'ISR viene eseguita. Invece, utilizzando FALLING, l'ISR verrebbe eseguita quando il pulsante viene rilasciato, ovvero quando il segnale passa da HIGH a LOW.
 
