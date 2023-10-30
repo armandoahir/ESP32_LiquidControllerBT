@@ -1,7 +1,7 @@
 # ESP32_LiquidControllerBT
 An Arduino program written and developed for an ESP32 VROOM 32 bit by Espressif
 
-Progetto Arduino di Sistemi di Elettronica Digitale
+Progetto di Sistemi di Elettronica Digitale, Unibs
 ESP32 Bluetooth Liquid Controller
 Realizzato da: Ahir Armando
 
