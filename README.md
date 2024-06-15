@@ -1,76 +1,83 @@
 # ESP32_LiquidControllerBT
+
 An Arduino program written and developed for an ESP32 VROOM 32 bit by Espressif
 
-Progetto di Sistemi di Elettronica Digitale, Unibs
-ESP32 Bluetooth Liquid Controller
-Realizzato da: Ahir Armando
+## Project of Digital Electronic Systems, Unibs
 
-INTRODUZIONE
+**ESP32 Bluetooth Liquid Controller**
 
-Ho voluto realizzare questo progetto, ispirandomi ad un viaggio che feci nella lontana estate del 2012, dai miei nonni in India.
-Ogni casa in questa zona dell’India è dotata, di serbatoi di acqua che, venivano riempiti due volte al giorno, attraverso un sistema idraulico, gestito dalla compagnia garante; ciò implicava che, se si sprecava l’acqua inutilmente, c’era il rischio di rimanerne senza, oppure usufruire di pompe (elettriche o manuali) per prelevare l’acqua dalle falde, aspettando il rifornimento successivo.
-Durante il mio soggiorno in India, mi è capitato di svuotare completamente il serbatoio per pulirlo. In quel momento ho iniziato a pensare ad un impianto che potesse essere utile per monitorare il livello dell’acqua ed avvertire quando l’acqua nel serbatoio fosse in esaurimento.
-Ho voluto realizzare questo modulo di monitoraggio del livello dell'acqua all'interno di un serbatoio, controllato via Bluetooth, mettendomi alla prova sulla programmazione di microcontrollori. Per sviluppare questo progetto ho utilizzato il microcontrollore ESP32 interfacciandolo con l’ambiente di sviluppo di arduino.
-ESP32 è un microcontrollore a 32 bit realizzato dall’azienda cinese “Espressif Systems”. È dotato di un processore dual – core a 240 MHz, memoria flash integrata, connessione Wifi, bluetooth, bluetooth Low energy e una vasta gamma di periferiche per l’input/output. È stato sviluppato come successore del popolare microcontrollore ESP8266, con un aumento delle prestazioni e delle funzionalità.
-Questo microcontrollore è ampiamente utilizzato nell’area dell’ internet of things (IoT), per realizzare progetti domestici, oppure per sensori di monitoraggio e molto altro ancora. La flessibilità di ESP32, combinata con la suo basso consumo per l’elaborazione, lo rende adatto per la realizzazione di molte applicazioni, dal controllo di dispositivi a basso consumo energetico, all’elaborazione di segnali complessi e l’interfacciamento con servizi cloud.
+**Created by: Ahir Armando**
 
-REALIZZAZIONE CIRCUITALE E LISTA DEI COMPONENTI
-	
-	- ESP32 microcontroller SoC (System on Chip)
-	- Sensore di profondità HC – SR04
-	- Buzzer(cicalino) YXDZ
+### Introduction
 
-ELENCO LAVORAZIONI
+I was inspired to create this project after a trip I took in the distant summer of 2012 to visit my grandparents in India. Every house in this region of India had water tanks that were filled twice a day by a hydraulic system managed by the guaranteeing company. This meant that if water was wasted unnecessarily, there was a risk of running out, or having to use pumps (electric or manual) to draw water from the groundwater, waiting for the next refill.
 
-	- Forature e filettature
-	- Saldatura a stagno su PCB
-	- Smussature bordi
+During my stay in India, I happened to completely empty the tank to clean it. At that moment, I began to think about a system that could be useful for monitoring the water level and alerting when the tank was running out of water. I wanted to create this water level monitoring module, controlled via Bluetooth, as a challenge to improve my microcontroller programming skills. To develop this project, I used the ESP32 microcontroller interfacing it with the Arduino development environment.
 
+ESP32 is a 32-bit microcontroller made by the Chinese company "Espressif Systems." It features a dual-core processor at 240 MHz, integrated flash memory, Wi-Fi connection, Bluetooth, Bluetooth Low Energy, and a wide range of input/output peripherals. It was developed as a successor to the popular ESP8266 microcontroller, with increased performance and functionality. This microcontroller is widely used in the area of the Internet of Things (IoT) to create home projects, monitoring sensors, and much more. The flexibility of the ESP32, combined with its low power consumption, makes it suitable for a wide range of applications, from controlling low-power devices to processing complex signals and interfacing with cloud services.
 
-Sensore HC – SR04
+### Circuit Implementation and Component List
 
-Il sensore HC-SR04 è un dispositivo di misurazione della distanza che utilizza gli ultrasuoni. Per capire come funziona, è utile sapere che gli ultrasuoni sono onde sonore ad alta frequenza, che si propagano nell'aria a una velocità di circa 340 metri al secondo. Il sensore HC-SR04 funziona inviando un impulso di ultrasuoni, che viene emesso dal trasmettitore del sensore. Questo impulso viaggia attraverso l'aria fino a incontrare un oggetto, che lo riflette. L'impulso riflesso viene poi rilevato dal ricevitore del sensore.
-Il tempo impiegato per l'impulso ad andare dall'emettitore all'oggetto e ritornare al ricevitore viene quindi misurato dal sensore HC-SR04. Questo tempo di volo viene poi utilizzato per calcolare la distanza tra l'oggetto e il sensore, utilizzando la formula:
+- ESP32 microcontroller SoC (System on Chip)
+- HC-SR04 depth sensor
+- Buzzer (YXDZ)
 
-distanza=(tempo di volo*velocità del suono)/2  	
+### Work Tasks
 
-Dove la velocità del suono nell'aria viene generalmente considerata pari a circa 340 m/s.
-Per rendere la misura più accurata, il sensore HC-SR04 di solito invia diversi impulsi di ultrasuoni e ne calcola la media dei tempi di volo. Il sensore dispone inoltre di un circuito integrato che si occupa di gestire l'emissione e la ricezione degli impulsi di ultrasuoni e di convertire il tempo di volo in una misura di distanza.
+- Drilling and threading
+- Soldering on PCB
+- Edge chamfering
 
+### HC-SR04 Sensor
 
+The HC-SR04 sensor is a distance measuring device that uses ultrasound. To understand how it works, it's helpful to know that ultrasound are high-frequency sound waves that travel through the air at a speed of about 340 meters per second. The HC-SR04 sensor works by sending an ultrasound pulse, which is emitted by the sensor's transmitter. This pulse travels through the air until it encounters an object, which reflects it. The reflected pulse is then detected by the sensor's receiver.
 
-BUZZER(CICALINO)
+The time taken for the pulse to travel from the emitter to the object and back to the receiver is then measured by the HC-SR04 sensor. This flight time is then used to calculate the distance between the object and the sensor using the formula:
 
-In generale, un buzzer è un dispositivo elettronico che produce un suono quando viene attivato. Esistono diverse tipologie di buzzer, tra cui quelli piezoelettrici e quelli elettromagnetici.
-Il buzzer piezoelettrico è costituito da una lamina di materiale piezoelettrico che vibra quando viene applicata una corrente elettrica ad essa. Questa vibrazione produce un suono ad una frequenza determinata dal design del buzzer. I buzzer piezoelettrici sono molto utilizzati in applicazioni di segnalazione acustica, come ad esempio nei sistemi di allarme, nei giocattoli e nei dispositivi di avviso sonoro.
-Il buzzer elettromagnetico, invece, utilizza un'armatura metallica che viene attratta da un magnete quando una corrente elettrica viene applicata alla bobina del magnete. Questo movimento produce un suono ad una determinata frequenza.
+\[ \text{distance} = \left(\text{flight time} \times \text{speed of sound}\right) / 2 \]
 
-CODICE SORGENTE
+where the speed of sound in air is generally considered to be about 340 m/s. To make the measurement more accurate, the HC-SR04 sensor usually sends several ultrasound pulses and averages the flight times. The sensor also has an integrated circuit that manages the emission and reception of ultrasound pulses and converts the flight time into a distance measurement.
 
-In seguito, il codice scritto per programmare la scheda AZ – Delivery ESP32, basata sul modulo ESP32 – WROOM. Il codice è stato compattato utilizzando dei pattern per delineare i componenti indipendenti tra loro; in particolare si ha:
+### Buzzer
 
-void loop() e void setup()  che sono funzioni obbligatorie per la realizzazione di un programma in Arduino; setup() è una funzione che serve per configurare le variabili dichiarate; ad esempio, se ho un led sul pin 13, dichiaro int led = 13 e nel setup() configuro il pin 13 come un output per vedere il segnale in uscita sul led; void loop() invece è una funzione che, come suggerisce il nome, continuerà in loop la porzione di codice scritta in essa. In questo progetto il loop() prevede un collegamento tra un dispositivo android e il modulo bluetooth dell’ESP32 (tramite la funzione void bluetooth()). Per la comunicazione su android, ho installato l’applicazione “Serial Bluetooth Terminal”. Quando il dispositivo android verrà associato, il loop attenderà un input specifico da parte del dispositivo stesso, che è il comando denominato “controllo_ON”; il comando fa partire un ciclo “do –  while” presente nella funzione sensor().
-	void sensor(), funzione che gestisce il sensore HC – SR04, calcolando ciclicamente la distanza tra il sensore e l’oggetto riscontrato dall’ultrasuoni. Il ciclo si interrompe se il sensore legge una distanza che non è compresa tra SOGLIA_MAX e SOGLIA_MIN.
-	void buzzAlarm(),è la funzione che gestisce l’allarme, azionando il buzzer.
+In general, a buzzer is an electronic device that produces a sound when activated. There are different types of buzzers, including piezoelectric and electromagnetic buzzers.
 
+A piezoelectric buzzer consists of a plate of piezoelectric material that vibrates when an electric current is applied to it. This vibration produces a sound at a frequency determined by the design of the buzzer. Piezoelectric buzzers are widely used in acoustic signaling applications, such as alarm systems, toys, and sound alert devices.
 
-APPROFONDIMENTO TIMER E ISR(INTERRUPT SERVICE ROUTINE)
+An electromagnetic buzzer, on the other hand, uses a metal armature that is attracted to a magnet when an electric current is applied to the magnet coil. This movement produces a sound at a specific frequency.
 
-Nella realizzazione di questo progetto, una parte critica è stata uscire da una funzione loop. Avevo valutato di utilizzare un costrutto di arduino per l’utilizzo dei timer per implementare la funzione di interrupt hardware del microcontrollore.
-I timer di Arduino sono componenti hardware che possono essere utilizzati per contare il tempo o per generare segnali di clock. I microcontrollori di Arduino hanno almeno un timer integrato, mentre alcuni modelli ne hanno anche più di uno. I timer di Arduino possono essere configurati per generare un interrupt a intervalli regolari, ovvero ogni volta che il timer raggiunge un valore specifico. In questo modo, è possibile creare funzioni che vengono eseguite ad intervalli di tempo specifici. Ad esempio, è possibile utilizzare un timer per accendere e spegnere un led ad una frequenza specifica, oppure per campionare un segnale analogico a determinati intervalli di tempo.
-Per utilizzare i timer di Arduino è possibile utilizzare la funzione "millis()" che restituisce il numero di millisecondi trascorsi dall'avvio del microcontrollore. Questo valore può essere utilizzato per impostare un timer interno e gestire eventi temporizzati. La funzione "delay()" è un altro modo per gestire il tempo in Arduino, ma questa blocca l'esecuzione del codice per un certo periodo di tempo, mentre la funzione millis() consente di eseguire altre attività nel frattempo.
+### Source Code
 
-Il comando attachInterrupt() è una funzione di Arduino che consente di attivare un'interfaccia di interrupt hardware, che permette di interrompere immediatamente l'esecuzione del programma principale e di eseguire una funzione definita dall'utente quando si verifica un evento specifico.
-L'interfaccia di interrupt hardware può essere utilizzata, ad esempio, per rispondere a un segnale di un sensore o a un input esterno, come un pulsante o un segnale proveniente da un altro microcontrollore. Quando si verifica l'evento specifico (ad esempio, quando il pulsante viene premuto), l'interfaccia di interrupt hardware genera un segnale di interrupt che interrompe immediatamente il flusso di esecuzione del programma principale e avvia l'esecuzione della funzione definita dall'utente.
-La funzione attachInterrupt() ha tre parametri in ingresso: il primo è il numero del pin di interrupt che si vuole utilizzare, il secondo è la funzione che si vuole eseguire quando si verifica l'interrupt, e il terzo indica il tipo di interrupt che si vuole utilizzare (ad esempio, se si vuole attivare l'interrupt su un fronte di salita o di discesa del segnale).
-Interrupt Service Routine (ISR) è una funzione di gestione degli interrupt che viene eseguita immediatamente dopo l'arrivo di un segnale di interrupt generato da un dispositivo hardware, come un sensore, un pulsante, una scheda di rete o un timer. L'ISR viene utilizzata per interrompere momentaneamente il flusso di esecuzione del programma principale e gestire l'evento che ha generato l'interrupt.
-L'ISR deve essere scritta in modo efficiente e veloce, poiché il microcontrollore deve tornare al più presto possibile alla normale esecuzione del programma principale. L'ISR deve anche essere scritta con una particolare attenzione alla sicurezza, poiché l'esecuzione del codice all'interno dell'ISR può causare problemi se non gestita correttamente.
-Il parametro "mode" della funzione attachInterrupt() in Arduino specifica il tipo di transizione del segnale di input sul pin di interrupt che deve attivare l'ISR (Interrupt Service Routine), ovvero la funzione che viene eseguita quando l'interrupt si verifica.
-Ci sono tre tipi di mode possibili: CHANGE, FALLING e RISING.
+Below is the code written to program the AZ-Delivery ESP32 board, based on the ESP32-WROOM module. The code is compacted using patterns to outline independent components, particularly:
 
-	CHANGE: attiva l'ISR quando il segnale di input sul pin di interrupt cambia di stato, ovvero da HIGH a LOW o viceversa.
-	FALLING: attiva l'ISR quando il segnale di input sul pin di interrupt passa da HIGH a LOW.
-	RISING: attiva l'ISR quando il segnale di input sul pin di interrupt passa da LOW a HIGH.
-	
-Ad esempio, se si utilizza il parametro RISING, l'ISR verrà eseguita quando il segnale di input sul pin di interrupt passa da LOW a HIGH. Questo può essere utile, ad esempio, per gestire un pulsante: quando il pulsante viene premuto, il segnale sul pin di interrupt passa da LOW a HIGH e l'ISR viene eseguita. Invece, utilizzando FALLING, l'ISR verrebbe eseguita quando il pulsante viene rilasciato, ovvero quando il segnale passa da HIGH a LOW.
+- `void loop()` and `void setup()` which are mandatory functions for creating an Arduino program. `setup()` is a function used to configure declared variables; for example, if I have a LED on pin 13, I declare `int led = 13` and in `setup()`, configure pin 13 as an output to see the signal on the LED. `void loop()` is a function that, as the name suggests, will continuously loop the code written in it. In this project, `loop()` provides a connection between an Android device and the ESP32's Bluetooth module (using the `void bluetooth()` function). For communication on Android, I installed the "Serial Bluetooth Terminal" application. When the Android device is paired, the loop will wait for a specific input from the device, which is the command named "control_ON"; the command starts a "do-while" loop present in the `sensor()` function.
+- `void sensor()`, a function that manages the HC-SR04 sensor, cyclically calculating the distance between the sensor and the object detected by the ultrasound. The cycle stops if the sensor reads a distance not between `THRESHOLD_MAX` and `THRESHOLD_MIN`.
+- `void buzzAlarm()`, the function that manages the alarm, activating the buzzer.
 
+### Timer and ISR (Interrupt Service Routine) Deep Dive
+
+In creating this project, a critical part was exiting a loop function. I considered using an Arduino construct for timers to implement the microcontroller's hardware interrupt function.
+
+Arduino timers are hardware components that can be used to count time or generate clock signals. Arduino microcontrollers have at least one built-in timer, while some models have more. Arduino timers can be configured to generate an interrupt at regular intervals, i.e., each time the timer reaches a specific value. This way, you can create functions that are executed at specific time intervals. For example, you can use a timer to turn a LED on and off at a specific frequency or sample an analog signal at certain time intervals.
+
+To use Arduino timers, you can use the "millis()" function, which returns the number of milliseconds since the microcontroller was started. This value can be used to set an internal timer and manage timed events. The "delay()" function is another way to manage time in Arduino, but it blocks code execution for a certain period, whereas the millis() function allows other activities to be performed in the meantime.
+
+The `attachInterrupt()` command is an Arduino function that activates a hardware interrupt interface, allowing the main program to be interrupted immediately and a user-defined function to be executed when a specific event occurs.
+
+The hardware interrupt interface can be used, for example, to respond to a signal from a sensor or external input, such as a button or a signal from another microcontroller. When the specific event occurs (e.g., when the button is pressed), the hardware interrupt interface generates an interrupt signal that immediately disrupts the main program flow and starts executing the user-defined function.
+
+The `attachInterrupt()` function has three input parameters: the first is the number of the interrupt pin you want to use, the second is the function you want to execute when the interrupt occurs, and the third indicates the type of interrupt you want to use (e.g., if you want to activate the interrupt on a rising or falling edge of the signal).
+
+The Interrupt Service Routine (ISR) is an interrupt management function executed immediately after the arrival of an interrupt signal generated by a hardware device, such as a sensor, button, network card, or timer. The ISR is used to momentarily interrupt the main program flow and handle the event that generated the interrupt.
+
+The ISR must be written efficiently and quickly, as the microcontroller must return to the main program execution as soon as possible. The ISR must also be written with special attention to safety, as executing code within the ISR can cause problems if not managed correctly.
+
+The "mode" parameter of the `attachInterrupt()` function in Arduino specifies the type of input signal transition on the interrupt pin that should activate the ISR (Interrupt Service Routine), i.e., the function that is executed when the interrupt occurs. 
+
+There are three possible modes: CHANGE, FALLING, and RISING.
+
+- `CHANGE`: activates the ISR when the input signal on the interrupt pin changes state, i.e., from HIGH to LOW or vice versa.
+- `FALLING`: activates the ISR when the input signal on the interrupt pin goes from HIGH to LOW.
+- `RISING`: activates the ISR when the input signal on the interrupt pin goes from LOW to HIGH.
+
+For example, if you use the RISING parameter, the ISR will execute when the input signal on the interrupt pin goes from LOW to HIGH. This can be useful, for example, for managing a button: when the button is pressed, the signal on the interrupt pin goes from LOW to HIGH, and the ISR executes. On the other hand, using FALLING, the ISR would execute when the button is released, i.e., when the signal goes from HIGH to LOW.
