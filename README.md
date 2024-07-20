@@ -34,8 +34,7 @@ The HC-SR04 sensor is a distance measuring device that uses ultrasound. To under
 
 The time taken for the pulse to travel from the emitter to the object and back to the receiver is then measured by the HC-SR04 sensor. This flight time is then used to calculate the distance between the object and the sensor using the formula:
 
-\[ \text{distance} = \left(\text{flight time} \times \text{speed of sound}\right) / 2 \]
-
+**distance = (flight time * speed of sound) / 2**
 where the speed of sound in air is generally considered to be about 340 m/s. To make the measurement more accurate, the HC-SR04 sensor usually sends several ultrasound pulses and averages the flight times. The sensor also has an integrated circuit that manages the emission and reception of ultrasound pulses and converts the flight time into a distance measurement.
 
 ### Buzzer
